@@ -1,7 +1,4 @@
-#include <string>
-#include "person.h"
-
-using namespace std;
+#include "person.h" // contains classes Person, Owner and Courier
 
 class Business {
     string name; // name of the business
@@ -14,14 +11,20 @@ class Business {
             //The amount of “ownership” should be adjusted during construction as well.
             this->name = name; // sets name
             this->address = address; // sets physical address
-            /*this->owners = new Owner[numberOfOwners];
-            for (int i = 0; i < numberOfOwners; i++) {
-                this->owners[i] = owners[i];
-            }*/
             this->owners = owners; // sets pointer to parameter
             this->numberOfOwners = numberOfOwners; // sets amount of Owner objects inside owners array
             for (int i = 0; i < numberOfOwners; i++) {
                 this->owners[i].set_ownership(100 / numberOfOwners); // calculates and sets percentage of ownership for each owner
+            }
+        }
+        ~Business() {
+            delete [] owners; // free memory allocated by the main program for Owners
+            Courier * traverse = couriers; // used for traversing Courier Linked List
+            Courier * temp = NULL; // used for deleting courier objects
+            while (traverse != NULL) {
+                temp = traverse;
+                traverse = traverse->getNext(); // gets the next courier on the list
+                delete temp; // deletes courier objects one by one
             }
         }
         void hire_courier(Courier courier) {

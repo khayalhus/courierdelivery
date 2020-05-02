@@ -11,6 +11,7 @@ class Person {
             this->name = name; // sets name
             this->surname = surname; // sets surname
         }
+        // there is no need for a custom deconstructor
         string getName() {
             return this->name; // getter for name
         }
@@ -29,6 +30,7 @@ class Owner : public Person {
         Owner(string name, string surname):Person(name,surname){
             ownership = 0; // ownership will be updated during Business object construction
         }
+        // there is no need for a custom deconstructor
         void set_ownership(int percentage) {
             this->ownership = percentage; // updates ownership with calculated percentage by Business class constructor
         }
@@ -49,6 +51,7 @@ class Courier : public Person {
                 cout << "ERROR: Invalid Vehicle Type" << endl;
             }
         }
+        // there is no need for a custom deconstructor
         bool operator==(Courier& in_object) { // const keywords were removed so parent class public member functions can be called
             if (this->getSurname().compare(in_object.getSurname()) == 0) { // checks surname first because given main.cpp has all names as "Courier"
                 if (this->getName().compare(in_object.getName()) == 0) { // checks name as well just in case
