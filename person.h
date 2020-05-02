@@ -39,8 +39,6 @@ class Owner : public Person {
 class Courier : public Person {
     string vehicle; // car (200), motorcycle (35), bicycle (10)
     Courier * next;
-    string sur;
-    string namae;
     public:
         Courier(string name, string surname, string vehicle):Person(name,surname) {
             this->next = NULL;
@@ -49,12 +47,10 @@ class Courier : public Person {
             } else {
                 cout << "ERROR: Invalid Vehicle Type" << endl;
             }
-            this->sur = surname;
-            this->namae = name;
         }
-        bool operator==(const Courier& in_object) const {
-            if (this->sur.compare(in_object.sur) == 0) {
-                if (this->namae.compare(in_object.namae) == 0) {
+        bool operator==(Courier& in_object) {
+            if (this->getSurname().compare(in_object.getSurname()) == 0) {
+                if (this->getName().compare(in_object.getName()) == 0) {
                     if (this->vehicle.compare(in_object.vehicle) == 0) {
                         return true;
                     }
